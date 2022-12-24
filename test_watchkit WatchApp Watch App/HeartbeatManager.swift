@@ -8,13 +8,10 @@
 import Foundation
 import HealthKit
 
+//コピペをつぎはぎなので必要ないものが含まれているかもしれません
 class HeartbeatManager: NSObject, ObservableObject {
-    var selectedWorkout: HKWorkoutActivityType? {
-        didSet {
-            guard let selectedWorkout = selectedWorkout else { return }
-            startWorkout(workoutType: selectedWorkout)
-        }
-    }
+    
+    static let shared = HeartbeatManager()
 
     @Published var showingSummaryView: Bool = false {
         didSet {
@@ -29,9 +26,11 @@ class HeartbeatManager: NSObject, ObservableObject {
     var builder: HKLiveWorkoutBuilder?
 
     // Start the workout.
-    func startWorkout(workoutType: HKWorkoutActivityType) {
+    func startWorkout() {
+        //元々ここでHKWorkoutActivityTypeというものが設定されていました。
+        //configuration.activityType = workoutType
+        //おそらく必要ないかと思いますが、いりそうなら調べてみてください。
         let configuration = HKWorkoutConfiguration()
-        configuration.activityType = workoutType
         configuration.locationType = .indoor
 
         // Create the session and obtain the workout builder.
@@ -136,7 +135,7 @@ class HeartbeatManager: NSObject, ObservableObject {
     }
 
     func resetWorkout() {
-        selectedWorkout = nil
+        
         builder = nil
         workout = nil
         session = nil

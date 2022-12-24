@@ -8,7 +8,9 @@
 import Foundation
 import WatchConnectivity
 
-final class MessageListViewModel: NSObject {
+//SwiftUIの記事を参照したためViewModelを作成しています。
+//ViewControllerに統一したりViewModelじゃない名前に変えたりしても全然OKと思われます
+final class IPhoneViewModel: NSObject {
     
     var session: WCSession
     
@@ -21,8 +23,9 @@ final class MessageListViewModel: NSObject {
     }
 }
 
-extension MessageListViewModel: WCSessionDelegate {
+extension IPhoneViewModel: WCSessionDelegate {
     
+    //sessionを開始
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
             print(error.localizedDescription)
@@ -30,19 +33,16 @@ extension MessageListViewModel: WCSessionDelegate {
             print("The session has completed activation.")
         }
     }
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
     }
     func sessionDidDeactivate(_ session: WCSession) {
     }
     
+    //メッセージを受け取った時呼び出されます
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         
         DispatchQueue.main.async {
-            
-//            let receivedAnimal = message["animal"] as? String ?? "UMA"
-//            let receivedEmoji = message["emoji"] as? String ?? "?"
-//
-//            print(receivedEmoji + receivedAnimal)
             
             let receive = message["average"] as? Double ?? 0
             

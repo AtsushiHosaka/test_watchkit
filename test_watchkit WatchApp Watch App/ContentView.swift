@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    let animals = ["ネコ", "イヌ", "ハムスター", "ドラゴン", "ユニコーン"]
-    let emojiAnimals = ["🐱", "🐶", "🐹", "🐲", "🦄"]
     
+    //@Stateをつけると、その変数を変更した時、それを用いて表示されているテキストなどが更新されます。
     @State var isCollecting = false
+    @State var buttonText = "start"
     
-    var viewModel = AnimalListViewModel()
+    var viewModel = WatchViewModel()
     
     @EnvironmentObject var heartbeatManager: HeartbeatManager
     
     var body: some View {
         
+        //縦に並べます
         VStack {
             Text("heartbeat: \(heartbeatManager.heartRate)")
                 .padding()
             Text("average: \(heartbeatManager.averageHeartRate)")
                 .padding()
-            Button("collect", action: {
+            Button(buttonText, action: {
                 
                 self.isCollecting = !self.isCollecting
+                
+                if isCollecting {
+                    
+                    buttonText = "stop"
+                }else {
+                    
+                    buttonText = "start"
+                }
                 
                 self.buttonPressed()
             })
@@ -35,35 +44,23 @@ struct ContentView: View {
         .onAppear {
             heartbeatManager.requestAuthorization()
         }
-//        List(0..<animals.count) { index in
-//            Button {
-//                self.sendMessage(index: index)
-//            } label: {
-//                HStack {
-//                    Text(self.emojiAnimals[index])
-//                        .font(.title)
-//                        .padding()
-//                    Text(self.animals[index])
-//                }
-//            }
-//        }
-//        .listStyle(CarouselListStyle())
-//        .navigationTitle(Text("Animal List"))
     }
     
     private func buttonPressed() {
         
         if isCollecting {
             
-            heartbeatManager.startWorkout(workoutType: .running)
+            heartbeatManager.startWorkout()
         }else {
             
             heartbeatManager.endWorkout()
             sendMessage()
+            
+            heartbeatManager.resetWorkout()
         }
     }
     
-    private func sendMessage() {
+    func sendMessage() {
         
         let messages: [String: Any] = ["average": heartbeatManager.averageHeartRate]
         

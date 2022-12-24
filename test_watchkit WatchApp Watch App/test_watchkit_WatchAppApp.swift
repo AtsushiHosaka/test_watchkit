@@ -11,7 +11,7 @@ import WatchConnectivity
 @main
 struct test_watchkit_WatchApp_Watch_AppApp: App {
     
-    @StateObject private var heartbeatManager = HeartbeatManager()
+    @StateObject private var heartbeatManager = HeartbeatManager.shared
     var body: some Scene {
         WindowGroup {
             ContentView()

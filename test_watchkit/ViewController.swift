@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var isReachable = "NO"
-    var viewModel = MessageListViewModel()
+    var viewModel = IPhoneViewModel()
     
     @IBOutlet weak var label: UILabel!
     
@@ -19,17 +19,24 @@ class ViewController: UIViewController {
         
         
     }
-
-    var sendInt: Int = 0
     
+    //AppleWatchに現在の心拍数の平均値を送るよう要求
+    //AppleWatchの画面が黒くなってるだけなら取得できます
+    //AppleWatchでアプリを閉じる（一覧画面に戻る）と取得できません
+    //したのisReachableがYESなら基本取得できるようです
     @IBAction func buttonPressed(_ sender: Any) {
         
-        sendInt += 1
+        let messages: [String: Any] = ["action": "sendAverage"]
         
-        
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            
+            print(error.localizedDescription)
+        }
     }
     
-    @IBAction func reachable(_ sender: Any) {
+    //AppleWatchとiPhoneが接続できているか
+    //AppleWatchでアプリを開いていないとNOになります
+    @IBAction func checkIsReachable(_ sender: Any) {
         
         if viewModel.session.isReachable {
             
@@ -42,6 +49,26 @@ class ViewController: UIViewController {
         }
         
         label.text = String(isReachable)
+    }
+    
+    @IBAction func startButtonPressed(_ sender: Any) {
+        
+        let messages: [String: Any] = ["action": "start"]
+        
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            
+            print(error.localizedDescription)
+        }
+    }
+    
+    @IBAction func endButtonPressed(_ sender: Any) {
+        
+        let messages: [String: Any] = ["action": "end"]
+        
+        self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
+            
+            print(error.localizedDescription)
+        }
     }
 }
 
