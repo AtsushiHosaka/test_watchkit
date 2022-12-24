@@ -11,28 +11,61 @@ struct ContentView: View {
     let animals = ["ネコ", "イヌ", "ハムスター", "ドラゴン", "ユニコーン"]
     let emojiAnimals = ["🐱", "🐶", "🐹", "🐲", "🦄"]
     
+    @State var isCollecting = false
+    
     var viewModel = AnimalListViewModel()
     
+    @EnvironmentObject var heartbeatManager: HeartbeatManager
+    
     var body: some View {
-        List(0..<animals.count) { index in
-            Button {
-                self.sendMessage(index: index)
-            } label: {
-                HStack {
-                    Text(self.emojiAnimals[index])
-                        .font(.title)
-                        .padding()
-                    Text(self.animals[index])
-                }
-            }
+        
+        VStack {
+            Text("heartbeat: \(heartbeatManager.heartRate)")
+                .padding()
+            Text("average: \(heartbeatManager.averageHeartRate)")
+                .padding()
+            Button("collect", action: {
+                
+                self.isCollecting = !self.isCollecting
+                
+                self.buttonPressed()
+            })
+            
         }
-        .listStyle(CarouselListStyle())
-        .navigationTitle(Text("Animal List"))
+        .onAppear {
+            heartbeatManager.requestAuthorization()
+        }
+//        List(0..<animals.count) { index in
+//            Button {
+//                self.sendMessage(index: index)
+//            } label: {
+//                HStack {
+//                    Text(self.emojiAnimals[index])
+//                        .font(.title)
+//                        .padding()
+//                    Text(self.animals[index])
+//                }
+//            }
+//        }
+//        .listStyle(CarouselListStyle())
+//        .navigationTitle(Text("Animal List"))
     }
     
-    private func sendMessage(index: Int) {
+    private func buttonPressed() {
         
-        let messages: [String: Any] = ["animal": animals[index], "emoji": emojiAnimals[index]]
+        if isCollecting {
+            
+            heartbeatManager.startWorkout(workoutType: .running)
+        }else {
+            
+            heartbeatManager.endWorkout()
+            sendMessage()
+        }
+    }
+    
+    private func sendMessage() {
+        
+        let messages: [String: Any] = ["average": heartbeatManager.averageHeartRate]
         
         self.viewModel.session.sendMessage(messages, replyHandler: nil) { (error) in
             

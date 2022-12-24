@@ -20,6 +20,7 @@
 		6D80F3BF2956CB23004971A7 /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D80F3BE2956CB23004971A7 /* AnimalListViewModel.swift */; };
 		6D80F3C12956CBEC004971A7 /* MessageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D80F3C02956CBEC004971A7 /* MessageListViewModel.swift */; };
 		6D80F3C32956D0B9004971A7 /* test_watchkit WatchApp Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6D80F3B02956C89A004971A7 /* test_watchkit WatchApp Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6DB063C22956E7D500B9999E /* HeartbeatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB063C12956E7D500B9999E /* HeartbeatManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		6D80F3B92956C89A004971A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6D80F3BE2956CB23004971A7 /* AnimalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewModel.swift; sourceTree = "<group>"; };
 		6D80F3C02956CBEC004971A7 /* MessageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewModel.swift; sourceTree = "<group>"; };
+		6DB063C12956E7D500B9999E /* HeartbeatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatManager.swift; sourceTree = "<group>"; };
+		6DB064322957484600B9999E /* test_watchkit WatchApp Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "test_watchkit WatchApp Watch App.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +122,10 @@
 		6D80F3B12956C89A004971A7 /* test_watchkit WatchApp Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				6DB064322957484600B9999E /* test_watchkit WatchApp Watch App.entitlements */,
 				6D80F3B22956C89A004971A7 /* test_watchkit_WatchAppApp.swift */,
 				6D80F3B42956C89A004971A7 /* ContentView.swift */,
+				6DB063C12956E7D500B9999E /* HeartbeatManager.swift */,
 				6D80F3BE2956CB23004971A7 /* AnimalListViewModel.swift */,
 				6D80F3B62956C89A004971A7 /* Assets.xcassets */,
 				6D80F3B82956C89A004971A7 /* Preview Content */,
@@ -257,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB063C22956E7D500B9999E /* HeartbeatManager.swift in Sources */,
 				6D80F3B52956C89A004971A7 /* ContentView.swift in Sources */,
 				6D80F3B32956C89A004971A7 /* test_watchkit_WatchAppApp.swift in Sources */,
 				6D80F3BF2956CB23004971A7 /* AnimalListViewModel.swift in Sources */,
@@ -470,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "test_watchkit WatchApp Watch App/test_watchkit WatchApp Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"test_watchkit WatchApp Watch App/Preview Content\"";
@@ -477,6 +484,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "test_watchkit WatchApp";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "AtsushiHosaka.test-watchkit";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -500,6 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "test_watchkit WatchApp Watch App/test_watchkit WatchApp Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"test_watchkit WatchApp Watch App/Preview Content\"";
@@ -507,6 +518,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "test_watchkit WatchApp";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "AtsushiHosaka.test-watchkit";
 				LD_RUNPATH_SEARCH_PATHS = (

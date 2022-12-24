@@ -39,10 +39,14 @@ extension MessageListViewModel: WCSessionDelegate {
         
         DispatchQueue.main.async {
             
-            let receivedAnimal = message["animal"] as? String ?? "UMA"
-            let receivedEmoji = message["emoji"] as? String ?? "?"
+//            let receivedAnimal = message["animal"] as? String ?? "UMA"
+//            let receivedEmoji = message["emoji"] as? String ?? "?"
+//
+//            print(receivedEmoji + receivedAnimal)
             
-            print(receivedEmoji + receivedAnimal)
+            let receive = message["average"] as? Double ?? 0
+            
+            print(receive)
         }
     }
 }
